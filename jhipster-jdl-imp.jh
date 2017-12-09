@@ -1,0 +1,66 @@
+entity Customer{
+name String,
+phonenumber String,
+age Integer,
+cylindrical String,
+spherical String,
+power String,
+longsight String,
+shortsight String,
+address String
+}
+
+entity Product {
+    name String,
+    productcode String,
+    description String,
+    image ImageBlob,
+    price BigDecimal,
+    quantity Long,
+    availability Boolean
+}
+
+entity Category {
+    name String
+}
+
+enum OrderStatus {
+    NEW,INPROGESS,COMPLETED,ONHOLD
+}
+
+enum PaymentType {
+    CREDITCARD,CASH,DEBITCARD
+}
+
+
+entity Customerorder{
+description String,
+orderdate Instant,
+orderfullfilled Instant,
+paymentype PaymentType,
+paymentdate Instant,
+totalAmount Long,
+orderStatus OrderStatus
+}
+
+entity OrderDetails{
+quantity Long,
+unitprice Long
+}
+
+relationship OneToMany {
+    Customer{customerorder} to Customerorder{customer(name)},
+    Customerorder{orderdetails} to OrderDetails{customerorder},
+    Product{orderdetails} to OrderDetails{product}
+}
+
+
+
+relationship ManyToMany {
+    Product{category(name)} to Category{product}
+}
+
+
+paginate Customerorder with pagination
+service all with serviceImpl
+

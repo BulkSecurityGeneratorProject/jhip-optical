@@ -1,0 +1,83 @@
+<div>
+    <h2>
+        <span>Order Details</span>
+        <button class="btn btn-primary float-right jh-create-entity create-order-details" [routerLink]="['/', { outlets: { popup: ['order-details-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Order Details
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="orderDetails">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Quantity</span></th>
+            <th><span>Unitprice</span></th>
+            <th><span>Customerorder</span></th>
+            <th><span>Product</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let orderDetails of orderDetails ;trackBy: trackId">
+                <td><a [routerLink]="['../order-details', orderDetails.id ]">{{orderDetails.id}}</a></td>
+                <td>{{orderDetails.quantity}}</td>
+                <td>{{orderDetails.unitprice}}</td>
+                <td>
+                    <div *ngIf="orderDetails.customerorder">
+                        <a [routerLink]="['../customerorder', orderDetails.customerorder?.id ]" >{{orderDetails.customerorder?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="orderDetails.product">
+                        <a [routerLink]="['../product', orderDetails.product?.id ]" >{{orderDetails.product?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../order-details', orderDetails.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'order-details/'+ orderDetails.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'order-details/'+ orderDetails.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
