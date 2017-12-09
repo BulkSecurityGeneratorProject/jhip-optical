@@ -1,0 +1,55 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "customerorder",
+            "otherEntityName": "customerorder",
+            "otherEntityRelationshipName": "customer"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phonenumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "age",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cylindrical",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "spherical",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "power",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longsight",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "shortsight",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171209023252",
+    "entityTableName": "customer",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

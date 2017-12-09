@@ -1,0 +1,55 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "orderdetails",
+            "otherEntityName": "orderDetails",
+            "otherEntityRelationshipName": "customerorder"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "orderdate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "orderfullfilled",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "paymentype",
+            "fieldType": "PaymentType",
+            "fieldValues": "CREDITCARD,CASH,DEBITCARD"
+        },
+        {
+            "fieldName": "paymentdate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "totalAmount",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "orderStatus",
+            "fieldType": "OrderStatus",
+            "fieldValues": "NEW,INPROGESS,COMPLETED,ONHOLD"
+        }
+    ],
+    "changelogDate": "20171209023255",
+    "entityTableName": "customerorder",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,80 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCustomerorderLabel">Create or edit a Customerorder</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!customerorder.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="customerorder.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="customerorder.description" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_orderdate">Orderdate</label>
+            <div class="d-flex">
+                <input id="field_orderdate" type="datetime-local" class="form-control" name="orderdate" [(ngModel)]="customerorder.orderdate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_orderfullfilled">Orderfullfilled</label>
+            <div class="d-flex">
+                <input id="field_orderfullfilled" type="datetime-local" class="form-control" name="orderfullfilled" [(ngModel)]="customerorder.orderfullfilled"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_paymentype">Paymentype</label>
+            <select class="form-control" name="paymentype" [(ngModel)]="customerorder.paymentype" id="field_paymentype" >
+                <option value="CREDITCARD">CREDITCARD</option>
+                <option value="CASH">CASH</option>
+                <option value="DEBITCARD">DEBITCARD</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_paymentdate">Paymentdate</label>
+            <div class="d-flex">
+                <input id="field_paymentdate" type="datetime-local" class="form-control" name="paymentdate" [(ngModel)]="customerorder.paymentdate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_totalAmount">Total Amount</label>
+            <input type="number" class="form-control" name="totalAmount" id="field_totalAmount"
+                [(ngModel)]="customerorder.totalAmount" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_orderStatus">Order Status</label>
+            <select class="form-control" name="orderStatus" [(ngModel)]="customerorder.orderStatus" id="field_orderStatus" >
+                <option value="NEW">NEW</option>
+                <option value="INPROGESS">INPROGESS</option>
+                <option value="COMPLETED">COMPLETED</option>
+                <option value="ONHOLD">ONHOLD</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_customer">Customer</label>
+            <select class="form-control" id="field_customer" name="customer" [(ngModel)]="customerorder.customer" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="customerOption.id === customerorder.customer?.id ? customerorder.customer : customerOption" *ngFor="let customerOption of customers; trackBy: trackCustomerById">{{customerOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

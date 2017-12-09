@@ -1,0 +1,95 @@
+<div>
+    <h2>
+        <span>Customerorders</span>
+        <button class="btn btn-primary float-right jh-create-entity create-customerorder" [routerLink]="['/', { outlets: { popup: ['customerorder-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Customerorder
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="customerorders">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span>Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="orderdate"><span>Orderdate</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="orderfullfilled"><span>Orderfullfilled</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="paymentype"><span>Paymentype</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="paymentdate"><span>Paymentdate</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="totalAmount"><span>Total Amount</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="orderStatus"><span>Order Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="customer.name"><span>Customer</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let customerorder of customerorders ;trackBy: trackId">
+                <td><a [routerLink]="['../customerorder', customerorder.id ]">{{customerorder.id}}</a></td>
+                <td>{{customerorder.description}}</td>
+                <td>{{customerorder.orderdate | date:'medium'}}</td>
+                <td>{{customerorder.orderfullfilled | date:'medium'}}</td>
+                <td>{{customerorder.paymentype}}</td>
+                <td>{{customerorder.paymentdate | date:'medium'}}</td>
+                <td>{{customerorder.totalAmount}}</td>
+                <td>{{customerorder.orderStatus}}</td>
+                <td>
+                    <div *ngIf="customerorder.customer">
+                        <a [routerLink]="['../customer', customerorder.customer?.id ]" >{{customerorder.customer?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../customerorder', customerorder.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'customerorder/'+ customerorder.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'customerorder/'+ customerorder.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="customerorders && customerorders.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>
