@@ -56,6 +56,7 @@ public class UserService {
         this.cacheManager = cacheManager;
     }
 
+
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository.findOneByActivationKey(key)
