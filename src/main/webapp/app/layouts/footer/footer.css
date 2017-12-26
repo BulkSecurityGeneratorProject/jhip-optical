@@ -1,0 +1,9 @@
+
+.footer {
+    display: block;
+    width: auto;
+    height: fit-content;
+    background-color: #e4e5e6;
+    border-color:black;
+    border-radius:5px;
+}
