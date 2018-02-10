@@ -8,10 +8,10 @@ import { CustomerService } from './customer.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 
 @Component({
-    selector: 'jhi-customer',
-    templateUrl: './customer.component.html'
+    selector: 'jhi-customer-sed',
+    templateUrl: './customer-sed.component.html'
 })
-export class CustomerComponent implements OnInit, OnDestroy {
+export class CustomerSedComponent implements OnInit, OnDestroy {
 customers: Customer[];
     currentAccount: any;
     eventSubscriber: Subscription;
@@ -48,7 +48,6 @@ customers: Customer[];
 
     search(query) {
         if (!query) {
-            this.customers=[];
             return this.clear();
         }
         this.currentSearch = query;
@@ -57,10 +56,10 @@ customers: Customer[];
 
     clear() {
         this.currentSearch = '';
-        this.customers=[];
-        this.clear();
+        this.loadAll();
     }
     ngOnInit() {
+        this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });

@@ -1,12 +1,6 @@
 <div>
     <h2>
         <span>Customers</span>
-        <button class="btn btn-primary float-right jh-create-entity create-customer" [routerLink]="['/', { outlets: { popup: ['customer-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down" >
-            Create new Customer
-            </span>
-        </button>
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -32,14 +26,6 @@
             <th><span>ID</span></th>
             <th><span>Name</span></th>
             <th><span>Phonenumber</span></th>
-            <th><span>Age</span></th>
-            <th><span>Cylindrical</span></th>
-            <th><span>Spherical</span></th>
-            <th><span>Power</span></th>
-            <th><span>Longsight</span></th>
-            <th><span>Shortsight</span></th>
-            <th><span>Address</span></th>
-            <th></th>
             </tr>
             </thead>
             <tbody>
@@ -47,37 +33,6 @@
                 <td><a [routerLink]="['../customer', customer.id ]">{{customer.id}}</a></td>
                 <td>{{customer.name}}</td>
                 <td>{{customer.phonenumber}}</td>
-                <td>{{customer.age}}</td>
-                <td>{{customer.cylindrical}}</td>
-                <td>{{customer.spherical}}</td>
-                <td>{{customer.power}}</td>
-                <td>{{customer.longsight}}</td>
-                <td>{{customer.shortsight}}</td>
-                <td>{{customer.address}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../customer', customer.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/delete'} }]"
-                                replaceUrl="true"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
-                    </div>
-                </td>
             </tr>
             </tbody>
         </table>

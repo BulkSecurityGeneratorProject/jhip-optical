@@ -5,6 +5,7 @@ import { UserRouteAccessService } from '../../shared';
 import { JhiPaginationUtil } from 'ng-jhipster';
 
 import { CustomerComponent } from './customer.component';
+import { CustomerSedComponent } from './customer-sed.component';
 import { CustomerDetailComponent } from './customer-detail.component';
 import { CustomerPopupComponent } from './customer-dialog.component';
 import { CustomerDeletePopupComponent } from './customer-delete-dialog.component';
@@ -21,6 +22,14 @@ export const customerRoute: Routes = [
     }, {
         path: 'customer/:id',
         component: CustomerDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'Customers'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'customersed',
+        component: CustomerSedComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'Customers'

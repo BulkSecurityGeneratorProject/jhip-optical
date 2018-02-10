@@ -94,8 +94,6 @@ public class CustomerServiceImpl implements CustomerService{
     @Transactional(readOnly = true)
     public List<Customer> search(String query) {
         log.debug("Request to search Customers for query {}", query);
-        return StreamSupport
-            .stream(customerSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        return customerSearchRepository.findByNameLikeOrPhonenumberLike(query,query);
     }
 }

@@ -6,6 +6,7 @@ import {
     CustomerService,
     CustomerPopupService,
     CustomerComponent,
+    CustomerSedComponent,
     CustomerDetailComponent,
     CustomerDialogComponent,
     CustomerPopupComponent,
@@ -27,6 +28,7 @@ const ENTITY_STATES = [
     ],
     declarations: [
         CustomerComponent,
+        CustomerSedComponent,
         CustomerDetailComponent,
         CustomerDialogComponent,
         CustomerDeleteDialogComponent,
@@ -36,6 +38,7 @@ const ENTITY_STATES = [
     entryComponents: [
         CustomerComponent,
         CustomerDialogComponent,
+        CustomerSedComponent,
         CustomerPopupComponent,
         CustomerDeleteDialogComponent,
         CustomerDeletePopupComponent,
